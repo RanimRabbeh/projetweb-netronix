@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Événements</title>
+    <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="event-front.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <img src="logo.png" alt="Logo" style="height: 80px; width: auto;">
+            <div class="nav-links">
+                <a href="#">Accueil</a>
+                <a href="#">Évènements</a>
+                <a href="#">Boutique</a>
+                <a href="#">Forum</a>
+                <a href="#">Réclamations</a>
+            </div>
+        </nav>
+
+        <div class="filter-options">
+            <p>Tous les types</p>
+            <select>
+                <option value="">Les plus populaires</option>
+                <option value="">Les événements disponibles</option>
+            </select>
+        </div>
+    </header>
+
+    <main>
+        <div class="destination-grid">
+            <!-- Card for Louvre -->
+            <div class="destination-card card-1">
+                <img src="Louvre.jpg" alt="Musée du Louvre">
+                <p>Musée du Louvre. Jeudi 1er Décembre</p>
+                <a href="reservation.html?event=Louvre&price=15">Réserver maintenant ></a>
+            </div>
+
+            <!-- Card for Bardo -->
+            <div class="destination-card card-2">
+                <img src="Bardo.jpg" alt="Musée du Bardo">
+                <p>Musée du Bardo, Lundi 2 Octobre</p>
+                <a href="reservation.html?event=Bardo&price=12">Réserver maintenant ></a>
+            </div>
+
+            <!-- Card for Paris (Eiffel Tower) -->
+            <div class="destination-card card-3">
+                <img src="Paris.jpg" alt="Tour Eiffel">
+                <p>Tour Eiffel, Dimanche 15 Novembre</p>
+                <a href="reservation.html?event=Paris&price=20">Réserver maintenant ></a>
+            </div>
+
+            <!-- Card for Spain -->
+            <div class="destination-card card-4">
+                <img src="Spain.jpg" alt="Espagne">
+                <p>Espagne, Samedi 22 Juillet</p>
+                <a href="reservation.html?event=Spain&price=18">Réserver maintenant ></a>
+            </div>
+
+            <!-- Card for Rome -->
+            <div class="destination-card card-5">
+                <img src="Rome.jpg" alt="Rome">
+                <p>Rome, Dimanche 9 Août</p>
+                <a href="reservation.html?event=Rome&price=25">Réserver maintenant ></a>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

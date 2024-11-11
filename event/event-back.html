@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Événements</title>
+    <link rel="stylesheet" href="event-back.css">
+</head>
+<body>
+
+    <header>
+        <h1>Gestion des Événements</h1>
+    </header>
+
+    <div class="container">
+        <!-- Tableau pour Créer un Nouvel Événement -->
+        <section>
+            <h2>Créer un Nouvel Événement</h2>
+            <form>
+                <div class="form-group">
+                    <label for="event-name">Nom de l'Événement :</label>
+                    <input type="text" id="event-name" class="input-field" placeholder="Exemple : Musée du Louvre" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-location">Lieu :</label>
+                    <input type="text" id="event-location" class="input-field" placeholder="Exemple : Paris, France" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-date">Date :</label>
+                    <input type="date" id="event-date" class="input-field" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-price">Prix du Billet (€) :</label>
+                    <input type="number" id="event-price" class="input-field" placeholder="Prix en euros" required>
+                </div>
+                <div class="form-group">
+                    <label for="event-photo">Photo de l'Événement :</label>
+                    <input type="file" id="event-photo" class="input-field" accept="image/*" required>
+                </div>
+                <a href="#" class="create-event-button">Créer l'Événement</a>
+            </form>
+        </section>
+
+        <!-- Tableau pour Gérer les Événements -->
+        <section>
+            <h2>Gérer les Événements</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nom de l'Événement</th>
+                            <th>Lieu</th>
+                            <th>Date</th>
+                            <th>Prix (€)</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Exemple d'événement -->
+                        <tr class="event-row" data-event-id="1">
+                            <td><input type="text" value="Musée du Louvre" disabled /></td>
+                            <td><input type="text" value="Paris, France" disabled /></td>
+                            <td><input type="date" value="2024-12-01" disabled /></td>
+                            <td><input type="number" value="15" disabled /></td>
+                            <td class="actions">
+                                <button class="button modify-btn">Modifier</button>
+                                <button class="button save-btn" style="display:none;">Enregistrer</button>
+                                <button class="button-danger delete-btn">Supprimer</button>
+                            </td>
+                        </tr>
+                        <tr class="event-row" data-event-id="2">
+                            <td><input type="text" value="Musée du Bardo" disabled /></td>
+                            <td><input type="text" value="Tunis, Tunisie" disabled /></td>
+                            <td><input type="date" value="2024-10-02" disabled /></td>
+                            <td><input type="number" value="12" disabled /></td>
+                            <td class="actions">
+                                <button class="button modify-btn">Modifier</button>
+                                <button class="button save-btn" style="display:none;">Enregistrer</button>
+                                <button class="button-danger delete-btn">Supprimer</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Fonction pour activer les champs d'un événement (Modifier)
+        document.querySelectorAll('.modify-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let row = this.closest('tr');
+                let inputs = row.querySelectorAll('input');
+                // Activer les champs de saisie
+                inputs.forEach(input => input.disabled = false);
+                // Afficher le bouton Enregistrer et masquer le bouton Modifier
+                row.querySelector('.save-btn').style.display = 'inline-block';
+                this.style.display = 'none';
+            });
+        });
+
+        // Fonction pour enregistrer les modifications
+        document.querySelectorAll('.save-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                let row = this.closest('tr');
+                let inputs = row.querySelectorAll('input');
+                // Désactiver les champs après l'enregistrement
+                inputs.forEach(input => input.disabled = true);
+                // Masquer le bouton Enregistrer et afficher le bouton Modifier
+                row.querySelector('.modify-btn').style.display = 'inline-block';
+                this.style.display = 'none';
+            });
+        });
+
+        // Fonction pour supprimer un événement
+        document.querySelectorAll('.delete-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm("Êtes-vous sûr de vouloir supprimer cet événement ?")) {
+                    let row = this.closest('tr');
+                    row.remove(); // Supprimer la ligne de l'événement
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

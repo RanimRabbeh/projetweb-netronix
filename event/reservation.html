@@ -1,0 +1,86 @@
+<html>
+<head>
+    <style>
+        /* Le style du formulaire */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f5f5dc; /* Beige background */
+        }
+
+        header {
+            background-color: #f8f8f8;
+            padding: 20px;
+            text-align: center;
+        }
+
+        form {
+            width: 60%;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"], input[type="number"], input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        h1 {
+            color: #003366;
+        }
+    </style>
+</head>
+<body>
+   <header>
+       <h1>Formulaire de Réservation</h1>
+   </header>
+
+   <form>
+       <!-- Champ du nom -->
+       <label for="name">Nom:</label>
+       <input type="text" id="name" name="name" required>
+
+       <!-- Champ du prénom -->
+       <label for="surname">Prénom:</label>
+       <input type="text" id="surname" name="surname" required>
+
+       <!-- Champ CIN -->
+       <label for="cin">CIN:</label>
+       <input type="text" id="cin" name="cin" required>
+
+       <!-- Champ de l'événement -->
+       <label for="event">Nom de l'événement:</label>
+       <input type="text" id="event" name="event" readonly> <!-- Le champ est en lecture seule car on va pré-remplir avec l'événement choisi -->
+
+       <!-- Champ du prix du billet -->
+       <label for="price">Prix du billet:</label>
+       <input type="number" id="price" name="price" readonly> <!-- Le champ est en lecture seule pour afficher le prix -->
+
+       <!-- Bouton de soumission -->
+       <input type="submit" value="Confirmer la réservation">
+   </form>
+
+   <script>
+       // Récupérer les paramètres de l'URL
+       const urlParams = new URLSearchParams(window.location.search);
+       const event = urlParams.get('event');  // Le nom de l'événement
+       const price = urlParams.get('price');  // Le prix du billet
+
+       // Remplir le formulaire avec les informations de l'URL
+       document.getElementById('event').value = event;
+       document.getElementById('price').value = price;
+   </script>
+</body>
+</html>
