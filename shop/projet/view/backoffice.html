@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Back Office - Cultivo boutique</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="C:\Users\Amine\Desktop\projet\view\logo.png" type="image/x-icon">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0000;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #000000;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .menu {
+            background-color: #FFE1CC;
+            padding: 15px;
+            border-radius: 8px;
+            margin-right: 20px;
+            width: 200px;
+        }
+
+        .menu h3 {
+            margin-top: 0;
+        }
+
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .menu ul li {
+            margin: 10px 0;
+        }
+
+        .menu ul li a {
+            text-decoration: none;
+            color: #5D3A00;
+        }
+
+        .content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            width: 800px;
+        }
+
+        .content h2 {
+            margin-top: 0;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn {
+            background-color: #5D3A00;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #4A2D00;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #FFE1CC;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Back Office - Cultivo Shop</h1>
+    </header>
+    <div class="container">
+        <div class="menu">
+            <h3>Menu</h3>
+            <ul>
+                <li><a href="#ajouter-article">Ajouter un article</a></li>
+                <li><a href="#gerer-articles">Gérer les articles</a></li>
+                <li><a href="#gerer-commandes">Gérer les commandes</a></li>
+                <li><a href="#gerer-paiements">Gérer les paiements</a></li>
+            </ul>
+        </div>
+        <div class="content" id="content">
+            <!-- Section Ajouter un article -->
+            <section id="ajouter-article">
+                <h2>Ajouter un article</h2>
+                <div class="form-group">
+                    <label for="nom-article">Nom de l'article</label>
+                    <input type="text" id="nom-article" name="nom-article">
+                </div>
+                <div class="form-group">
+                    <label for="description-article">Description</label>
+                    <textarea id="description-article" name="description-article"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="prix-article">Prix</label>
+                    <input type="text" id="prix-article" name="prix-article">
+                </div>
+                <!-- Ajout d'un champ pour télécharger une image -->
+                <div class="form-group">
+                    <label for="photo-article">Photo de l'article</label>
+                    <input type="file" id="photo-article" name="photo-article" accept="image/*">
+                </div>
+                <button class="btn">Ajouter l'article</button>
+            </section>
+
+            <!-- Section Gérer les articles -->
+            <section id="gerer-articles">
+                <h2>Gérer les articles</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nom de l'article</th>
+                            <th>Description</th>
+                            <th>Prix</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>montre</td>
+                            <td>montre 1955</td>
+                            <td>150 TND</td>
+                            <td>En attente</td>
+                            <td>
+                                <button class="btn">Approuver</button>
+                                <button class="btn">Rejeter</button>
+                                <button class="btn">Supprimer</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section Gérer les commandes -->
+            <section id="gerer-commandes">
+                <h2>Gérer les commandes</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID de commande</th>
+                            <th>Nom du client</th>
+                            <th>Adresse</th>
+                            <th>Article</th>
+                            <th>Prix</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>12345</td>
+                            <td>ahmed</td>
+                            <td>ariene soghra</td>
+                            <td>tableau</td>
+                            <td>102 TND</td>
+                            <td>En attente</td>
+                            <td>
+                                <button class="btn">Approuver</button>
+                                <button class="btn">Rejeter</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Section Gérer les paiements -->
+            <section id="gerer-paiements">
+                <h2>Gérer les paiements</h2>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID de paiement</th>
+                            <th>Nom du client</th>
+                            <th>Montant</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>98765</td>
+                            <td>amine</td>
+                            <td>100 TND</td>
+                            <td>En attente</td>
+                            <td>
+                                <button class="btn">Approuver</button>
+                                <button class="btn">Rejeter</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
