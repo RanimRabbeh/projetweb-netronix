@@ -1,0 +1,183 @@
+/* Reset de base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    color: #333;
+}
+
+/* En-tête */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: #4a4e69;
+    color: #f0f2f5;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+header nav a {
+    color: #f0f2f5;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+header nav a:hover {
+    color: #ff8b6e;
+}
+
+/* Contenu principal */
+main {
+    padding: 30px;
+}
+
+.review-management h2 {
+    font-size: 22px;
+    margin-bottom: 20px;
+    color: #4a4e69;
+    font-weight: bold;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+}
+
+table thead {
+    background-color: #22223b;
+    color: #f0f2f5;
+    text-align: left;
+}
+
+table th, table td {
+    padding: 15px;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f7f7f9;
+}
+
+table tbody tr:hover {
+    background-color: #e2e2e2;
+    transition: background-color 0.3s;
+}
+
+/* Boutons d'action */
+button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.edit-btn {
+    background-color: #4caf50;
+}
+
+.delete-btn {
+    background-color: #e53935;
+}
+
+.highlight-btn {
+    background-color: #ffb74d;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* Modales */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.close {
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+    color: #22223b;
+}
+
+.confirm-btn {
+    background-color: #e53935;
+}
+
+.cancel-btn, .save-btn {
+    background-color: #4caf50;
+}
+
+.confirm-btn, .cancel-btn, .save-btn {
+    color: #fff;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.confirm-btn:hover, .cancel-btn:hover, .save-btn:hover {
+    opacity: 0.9;
+}
+
+form label {
+    display: block;
+    margin: 15px 0 5px;
+    font-weight: 500;
+    color: #22223b;
+}
+
+form input, form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s;
+}
+
+form input:focus, form textarea:focus {
+    border-color: #4a4e69;
+    outline: none;
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration - Gestion des Avis</title>
+    <link rel="stylesheet" href="avisback.css">
+</head>
+<body>
+    <header>
+        <h1>Tableau de Bord du Modérateur</h1>
+        <nav>
+            <a href="#">Dashboard</a>
+            <a href="#">Utilisateurs</a>
+            <a href="#">Paramètres</a>
+            <a href="#">Déconnexion</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="review-management">
+            <h2>Gestion des Avis</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Musée du Louvre</td>
+                        <td>Utilisateur 6845</td>
+                        <td>10 Octobre</td>
+                        <td>
+                            <button class="edit-btn" onclick="openEditModal(1)">Modifier</button>
+                            <button class="delete-btn" onclick="openDeleteModal(1)">Supprimer</button>
+                            <button class="highlight-btn">Mettre en Avant</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Art Gallery Cairo</td>
+                        <td>Utilisateur 9706</td>
+                        <td>26 Septembre</td>
+                        <td>
+                            <button class="edit-btn" onclick="openEditModal(2)">Modifier</button>
+                            <button class="delete-btn" onclick="openDeleteModal(2)">Supprimer</button>
+                            <button class="highlight-btn">Mettre en Avant</button>
+                        </td>
+                    </tr>
+                    <!-- Plus d'avis ici -->
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Fenêtre modale pour confirmation de suppression -->
+    <div id="deleteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('deleteModal')">&times;</span>
+            <p>Êtes-vous sûr de vouloir supprimer cet avis ?</p>
+            <button class="confirm-btn" onclick="deleteReview()">Confirmer</button>
+            <button class="cancel-btn" onclick="closeModal('deleteModal')">Annuler</button>
+        </div>
+    </div>
+
+    <!-- Fenêtre modale pour modification -->
+    <div id="editModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('editModal')">&times;</span>
+            <h2>Modifier l'Avis</h2>
+            <form>
+                <label for="editTitle">Titre:</label>
+                <input type="text" id="editTitle" name="editTitle" required>
+
+                <label for="editContent">Contenu:</label>
+                <textarea id="editContent" name="editContent" required></textarea>
+
+                <button type="submit" class="save-btn">Enregistrer</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>

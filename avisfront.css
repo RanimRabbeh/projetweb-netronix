@@ -1,0 +1,179 @@
+/* Reset some basic styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    color: #333;
+}
+
+header .logo img {
+    height: 100px;
+}
+
+header nav {
+    display: flex;
+    flex: 1;
+    justify-content: space-evenly;
+}
+
+header nav a {
+    color: #313a30;
+    text-decoration: none;
+    padding: 10px;
+}
+
+header nav a:hover {
+    text-decoration: underline;
+}
+
+main {
+    display: flex;
+    padding: 20px;
+}
+
+.forum-section {
+    flex: 3;
+    margin-right: 20px;
+}
+
+.search-bar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+    width: 80%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.add-review-btn {
+    padding: 10px 15px;
+    background-color: #c4813a;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-review-btn:hover {
+    background-color: #a9652e;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.review-item {
+    background-color: #eee8d5;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+}
+
+.review-item h3 {
+    color: #c4813a;
+    margin-bottom: 10px;
+}
+
+.review-item p {
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.user-comments {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.user {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.comment {
+    margin-right: 10px;
+    color: #555;
+}
+
+.date {
+    font-size: 12px;
+    color: #999;
+    margin-left: auto;
+}
+
+.view-more {
+    display: inline-block;
+    color: #333;
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.comment-btn {
+    background-color: #a9652e;
+    color: #fff;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+.comment-btn:hover {
+    background-color: #814d23;
+}
+
+.events-sidebar {
+    flex: 1;
+    background-color: #635DFF;
+    padding: 20px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.events-sidebar h2 {
+    margin-bottom: 15px;
+}
+
+.events-sidebar ul {
+    list-style: none;
+}
+
+.events-sidebar ul li {
+    margin-bottom: 10px;
+}
+
+.events-sidebar ul li button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4A4CB1;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: left;
+    font-size: 14px;
+}
+
+.events-sidebar ul li button:hover {
+    background-color: #3333A1;
+}
