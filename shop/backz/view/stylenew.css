@@ -1,0 +1,84 @@
+/* Custom Styles - custom_styles.css */
+
+/* Set the body background color to gray */
+body {
+    background-color: #f4f4f4; /* Light gray */
+}
+
+/* Set the container with the search form to have a blue background */
+.app-search {
+    background-color: #007bff; /* Blue */
+    padding: 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+/* Style the sidebar (navigation) on the left */
+.left-sidebar {
+    background-color: #ffffff; /* White */
+    width: 250px; /* Fixed width for the sidebar */
+    position: fixed; /* Fix the sidebar to the left */
+    height: 100vh; /* Full height of the viewport */
+    top: 0;
+    left: 0;
+    padding-top: 20px; /* Adjust padding at the top for spacing */
+}
+
+/* Ensure the sidebar navigation is properly styled */
+.sidebar-nav {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+.sidebar-nav li {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+}
+
+.sidebar-nav li a {
+    color: #007bff; /* Blue color for links */
+    text-decoration: none;
+    font-size: 16px;
+    display: block;
+}
+
+/* Hover effect for sidebar links */
+.sidebar-nav li a:hover {
+    background-color: #f1f1f1; /* Light gray background on hover */
+    border-radius: 5px;
+}
+
+/* Make sure the content of the page is not hidden by the sidebar */
+.page-wrapper {
+    margin-left: 250px; /* Offset content to the right so it's not hidden behind the sidebar */
+    padding: 20px;
+    background-color: #f4f4f4; /* Light gray background for the main content */
+}
+
+/* Set the navbar to be blue */
+.navbar {
+    background-color: #007bff !important; /* Blue */
+}
+
+/* Set the topbar header to have a blue background */
+.topbar {
+    background-color: #007bff !important; /* Blue */
+}
+
+/* Customize sidebar links */
+.sidebar-link {
+    color: #007bff; /* Blue */
+}
+
+/* Hover effect for sidebar links */
+.sidebar-link:hover {
+    background-color: #f1f1f1;
+}
+
+/* Footer style */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
