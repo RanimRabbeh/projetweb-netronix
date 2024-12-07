@@ -127,6 +127,22 @@ usort($products, function($a, $b) {
             background-color: #3b2606; 
         }
 
+        .details-button {
+            background-color: #ffffff; /* White background */
+            color: #000000; /* Black text */
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 12px;
+            border: 1px solid #ccc; /* Light grey border */
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .details-button:hover {
+            background-color: #f0f0f0; /* Slightly darker white on hover */
+        }
+
         #search-bar {
             padding: 10px;
             font-size: 16px;
@@ -210,14 +226,12 @@ usort($products, function($a, $b) {
         
         <button class="convert-btn" onclick="toggleEuroPrice(this)">Convert to Euro</button>
         <a href="achat.php" target="_blank"><button class="buy-button">Acheter</button></a>
+        <button class="details-button">Plus de détails</button> <!-- Button renamed to "Plus de détails" -->
         <div class="favorite-icon" onclick="toggleFavorite(this)">
             <i class="fas fa-star"></i> <!-- Font Awesome star icon -->
         </div>
     </div>
-<?php endforeach; ?>
-
-
-        
+<?php endforeach; ?>      
     </main>
 
     <script>
