@@ -1,0 +1,28 @@
+
+
+
+.badge-percentage {
+    font-size: 1.4em;
+    color: #4CAF50;
+    font-weight: bold;
+}
+
+.badge-status {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #FF9800; /* Par défaut, vous pouvez ajuster selon le statut */
+}
+
+.badge-status.critique {
+    color: #f44336; /* Rouge pour les réclamations critiques */
+}
+
+.badge-status.moyen {
+    color: #FFEB3B; /* Jaune pour les réclamations moyennes */
+}
+
+.badge-status.faible {
+    color: #8BC34A; /* Vert pour les réclamations faibles */
+}
+
+
