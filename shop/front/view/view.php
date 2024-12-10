@@ -38,12 +38,14 @@ usort($products, function($a, $b) {
             align-items: center;
             padding: 50px;
         }
+
         header h1.title {
             margin: 0;
             color: #9b640b;
-            text-align: match-parent;
+            text-align: center;
             flex: 1;
         }
+
         header h1 {
             margin: 0 auto; 
             color: #d4942e; 
@@ -69,22 +71,31 @@ usort($products, function($a, $b) {
             margin: 10px;
             text-align: center;
             width: 200px; /* Adjust width as needed */
+            max-height: 380px; /* Limit the height of each product item */
+            overflow: hidden; /* Ensure the content doesn't overflow */
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .image-gallery {
             display: flex;
             flex-direction: column;
             gap: 5px;
+            overflow: hidden;
         }
 
         .image-gallery img {
             max-width: 100%;
+            height: 150px; /* Set a fixed height for product images */
+            object-fit: cover; /* Ensure images fit within the box */
             border-radius: 5px;
         }
 
         .shop-item h2 {
             font-size: 1.2em;
             color: #010100; 
+            margin: 10px 0;
         }
 
         .description {
@@ -94,22 +105,14 @@ usort($products, function($a, $b) {
             -webkit-box-orient: vertical;
             overflow: hidden;
             text-overflow: ellipsis;
-        }
-
-        .show-more {
-            background-color: transparent;
-            color: #5D3A00;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            font-size: 0.9em;
-            margin-top: 5px;
+            margin: 5px 0;
         }
 
         .price {
             font-size: 1.1em;
             color: #000; 
             font-weight: bold;
+            margin: 5px 0;
         }
 
         .buy-button {
@@ -212,52 +215,57 @@ usort($products, function($a, $b) {
     </header>
 
     <main>
-    <?php foreach ($products as $product) : 
-    $priceEUR = $product->getPrix() * $conversionRate; // Convert TND to EUR
-?>
-    <div class="shop-item" data-name="<?= $product->getNom(); ?>">
-    <?php if ($product->getPhoto()) : ?>
-            <img src="data:image/jpeg;base64,<?= $product->getPhoto(); ?>" alt="<?= $product->getNom(); ?>" style="width: 150px; height: 90px; object-fit: cover;">
-        <?php endif; ?>
+    <?php foreach ($products as $product): ?>
+    <div class="shop-item">
+        <div class="image-gallery">
+            <img src="data:image/jpeg;base64,<?= $product->getPhoto(); ?>" alt="Product Photo">
+        </div>
         <h2><?= $product->getNom(); ?></h2>
         <p class="description"><?= $product->getQuantite(); ?></p>
-        <p class="price">Prix: <?= $product->getPrix(); ?> TND</p>
-        <p class="euro-price">Prix: <?= number_format($priceEUR, 2); ?> EUR</p>
-        
-        <button class="convert-btn" onclick="toggleEuroPrice(this)">Convert to Euro</button>
-        <a href="achat.php" target="_blank"><button class="buy-button">Acheter</button></a>
-        <button class="details-button">Plus de détails</button> <!-- Button renamed to "Plus de détails" -->
-        <div class="favorite-icon" onclick="toggleFavorite(this)">
-            <i class="fas fa-star"></i> <!-- Font Awesome star icon -->
-        </div>
+        <p class="price" id="price-<?= $product->getId(); ?>">Prix: <?= $product->getPrix(); ?> TND</p>
+        <button class="convert-btn" onclick="convertToEuro(this, <?= $product->getPrix(); ?>, <?= $product->getId(); ?>)">Convert to Euro</button>
+        <p class="euro-price" id="euro-<?= $product->getId(); ?>"></p>
+        <a href="product_details.php?id=<?= $product->getId(); ?>" target="_blank"><button class="details-button">Plus de détails</button></a>
     </div>
-<?php endforeach; ?>      
+    <?php endforeach; ?>
     </main>
 
     <script>
+        function convertToEuro(button, priceTND, productId) {
+            var euroPrice = priceTND * <?= $conversionRate; ?>;
+            var euroPriceElement = document.getElementById('euro-' + productId);
+            var priceElement = document.getElementById('price-' + productId);
+
+            // Toggle Euro price visibility
+            if (euroPriceElement.style.display === "none" || euroPriceElement.style.display === "") {
+                euroPriceElement.innerText = "Prix: " + euroPrice.toFixed(2) + " EUR";
+                euroPriceElement.style.display = "block"; // Show Euro price
+                priceElement.style.display = "none"; // Hide TND price
+            } else {
+                euroPriceElement.style.display = "none"; // Hide Euro price
+                priceElement.style.display = "block"; // Show TND price again
+            }
+        }
+
         function searchProduct() {
-            const searchValue = document.getElementById('search-bar').value.toLowerCase();
-            const shopItems = document.querySelectorAll('.shop-item');
+            var input, filter, main, shopItems, h2, i, txtValue;
+            input = document.getElementById('search-bar');
+            filter = input.value.toUpperCase();
+            main = document.querySelector('main');
+            shopItems = main.getElementsByClassName('shop-item');
 
-            shopItems.forEach(item => {
-                const itemName = item.getAttribute('data-name').toLowerCase();
-                if (itemName.includes(searchValue)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
+            for (i = 0; i < shopItems.length; i++) {
+                h2 = shopItems[i].getElementsByTagName('h2')[0];
+                if (h2) {
+                    txtValue = h2.textContent || h2.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        shopItems[i].style.display = '';
+                    } else {
+                        shopItems[i].style.display = 'none';
+                    }
                 }
-            });
-        }
-
-        function toggleEuroPrice(button) {
-            const euroPrice = button.previousElementSibling;
-            euroPrice.style.display = (euroPrice.style.display === "none") ? "block" : "none";
-        }
-
-        function toggleFavorite(element) {
-            element.classList.toggle('active');
+            }
         }
     </script>
-
 </body>
 </html>
