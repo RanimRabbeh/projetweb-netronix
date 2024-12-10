@@ -20,7 +20,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if (!empty($photo)) {
         $targetDir = "../uploads/";
         $targetFile = $targetDir . basename($photo);
-        move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile);
+        if (move_uploaded_file($_FILES['photo']['tmp_name'], $targetFile)) {
+            // Photo uploaded successfully
+        } else {
+            echo 'Erreur lors de l\'upload de la photo.';
+            exit;
+        }
     } else {
         $photo = $_POST['existing_photo'];
     }
@@ -43,14 +48,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <body>
     <h2>Modifier un Produit</h2>
     <form action="edit_product.php" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="idProduit" value="<?= $product->IdProduit ?>">
-        <input type="hidden" name="existing_photo" value="<?= $product->Photo ?>">
+        <input type="hidden" name="idProduit" value="<?= htmlspecialchars($product->IdProduit) ?>">
+        <input type="hidden" name="existing_photo" value="<?= htmlspecialchars($product->Photo) ?>">
         <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" value="<?= $product->Nom ?>" required>
+        <input type="text" id="nom" name="nom" value="<?= htmlspecialchars($product->Nom) ?>" required>
         <label for="prix">Prix :</label>
-        <input type="number" id="prix" name="prix" value="<?= $product->Prix ?>" required>
+        <input type="number" id="prix" name="prix" value="<?= htmlspecialchars($product->Prix) ?>" required>
         <label for="quantite">Quantité :</label>
-        <input type="number" id="quantite" name="quantite" value="<?= $product->Quantite ?>" required>
+        <input type="number" id="quantite" name="quantite" value="<?= htmlspecialchars($product->Quantite) ?>" required>
         <label for="photo">Photo :</label>
         <input type="file" id="photo" name="photo">
         <button type="submit">Modifier</button>
