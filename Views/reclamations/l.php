@@ -1,4 +1,9 @@
 <?php
+require_once '../../Controller/SatisfactionController.php';
+
+// Initialiser le contrôleur et appeler la méthode pour obtenir les données
+$controller = new SatisfactionController();
+$controller->afficherTauxSatisfaction();
 require_once '../../Controller/ReclamationController.php';
 session_start(); // Démarre la session pour accéder à $_SESSION['admin']
 
@@ -296,6 +301,44 @@ foreach ($reclamationsByEtat as $etat) {
             <!-- Container fluid  -->
             <!-- ============================================================== -->
             <div class="main-container">
+            <?php if (isset($tauxSatisfaction)): ?>
+    <p>Le taux de satisfaction global est de : <?php echo round($tauxSatisfaction, 2); ?>%</p>
+    <!-- Conteneur pour le graphique -->
+    <canvas id="pieChart" width="400" height="400"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('pieChart').getContext('2d');
+        var pieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Satisfaits', 'Insatisfaits'],
+                datasets: [{
+                    data: [<?php echo round($tauxSatisfaction, 2); ?>, <?php echo 100 - round($tauxSatisfaction, 2); ?>],
+                    backgroundColor: ['#4caf50', '#f44336'],
+                    borderColor: ['#fff', '#fff'],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: { position: 'top' },
+                    tooltip: {
+                        callbacks: {
+                            label: function(tooltipItem) {
+                                return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+<?php else: ?>
+    <p>Les données de satisfaction sont indisponibles pour le moment.</p>
+<?php endif; ?>
+
+        
     <div class="top-stats">
         <!-- Statistique du type de réclamation le plus fréquent -->
         <div class="stats-most-container">
@@ -439,6 +482,7 @@ foreach ($reclamationsByEtat as $etat) {
     <script src="../../js/sidebarmenu.js"></script>
     <!--Custom JavaScript -->
     <script src="../../js/custom.js"></script>
+    
 </body>
 
 </html>

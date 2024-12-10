@@ -14,6 +14,7 @@ class Reclamation {
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result['count'];
     }
+    //nombre de reclamation par type
     public function countReclamationsByType() {
         $query = "SELECT TypeDeReclamation, COUNT(*) as count 
                   FROM reclamations 
@@ -22,6 +23,7 @@ class Reclamation {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    //nombre de reclamations par etat
     public function countReclamationsByEtat() {
         $query = "SELECT Etat, COUNT(*) as count 
                   FROM reclamations 
@@ -55,6 +57,7 @@ class Reclamation {
         $stmt->bindParam(':id', $id);
         $stmt->execute();
     }
+    //le type de reclamation le plus mis
     public function getMostCommonReclamationType() {
         // Récupère le type de réclamation le plus fréquent
         $query = "SELECT TypeDeReclamation, COUNT(*) as count FROM reclamations GROUP BY TypeDeReclamation ORDER BY count DESC LIMIT 1";

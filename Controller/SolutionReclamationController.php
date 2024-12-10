@@ -24,18 +24,10 @@ class SolutionReclamationController {
         // Insérer la solution dans la base de données
         $this->model->insertSolution($idReclamation, $idAdmin, $solution);
     
-        // Obtenez l'email de l'utilisateur associé à cette solution
-        $userEmail = $this->model->getUserEmailBySolutionId($idReclamation);
-    
-        if ($userEmail) {
-            // Envoyer un e-mail à l'utilisateur pour l'informer de la solution
-            $this->sendSolutionEmail($userEmail, $solution);
-            header("Location: ../../index.html"); 
-            exit;
-        }
+        header("Location: ../../index.html"); 
+
 
     }
-    
     private function sendSolutionEmail($toEmail, $solution) {
         $mail = new PHPMailer(true);
     
@@ -53,12 +45,12 @@ class SolutionReclamationController {
             
     
             // Configurer l'expéditeur et le destinataire
-            $mail->setFrom('aymenmbarek305@gmail.com', 'Service Réclamations');
+            $mail->setFrom('aymenmbarek305@gmail.com', 'Service Reclamations');
             $mail->addAddress($toEmail);  // Adresse de l'utilisateur
     
             // Contenu de l'e-mail
             $mail->isHTML(true);
-            $mail->Subject = 'Solution à votre réclamation';
+            $mail->Subject = 'Solution à votre reclamation';
             $mail->Body = "
                 Bonjour,<br><br>
                 Votre réclamation a reçu une réponse.<br>

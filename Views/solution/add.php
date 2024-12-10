@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $isAdded = $solutionController->addSolution($idReclamation, $idAdmin, $solution);
 
         if ($isAdded) {
-            header("Location: solutionlist.php");
+            header("Location: sl.php");
             exit();
         } else {
             $message = "Erreur lors de l'ajout de la solution.";
