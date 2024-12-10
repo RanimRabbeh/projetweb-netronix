@@ -1,0 +1,541 @@
+/* General styles */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #000; /* Fallback color */
+    color: #fff;
+    position: relative;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../assets/img/background/15.jpeg') no-repeat center center fixed;
+    background-size: cover;
+    opacity: 0.4; /* Adjust this value for desired opacity */
+    z-index: -1;
+}
+
+/* Navigation styles */
+nav {
+    display: flex;
+    justify-content: center; /* Centers the menu */
+    align-items: center; /* Vertically aligns items */
+    padding: 10px 20px;
+    position: relative; /* Allows absolute positioning if needed */
+}
+
+.menu {
+    list-style: none;
+    display: flex;
+    gap: 50px; /* Space between nav links */
+    margin: 0;
+    padding: 0;
+    flex: 1; /* Fills available space for centering */
+    justify-content: center; /* Ensures nav links are centered */
+}
+
+/* Logo on the Left */
+.nav-left {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    height: 80px; /* Adjust size as needed */
+    width: auto;
+}
+
+.menu li {
+    margin: 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.menu a:hover {
+    color: #c7b580; /* Hover effect */
+}
+
+/* Right-aligned button */
+.nav-right {
+    position: absolute;
+    right: 20px; /* Aligns the button to the right */
+}
+
+.login-btn {
+    background-color: #007bff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    color: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.login-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Container and section styles */
+.container-fluid.service {
+    display: flex;
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    flex-direction: column; /* Ensures content stacks vertically */
+    min-height: 60vh; /* Full viewport height */
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+.container-fluid.service h1.text-primary {
+    color: #d8c797; /* Accent color for "Nos Événements" */
+    font-size: 50px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    text-align: center; /* Center the text horizontally */
+}
+
+/* Optional: For centering the entire header section if needed */
+.text-center.mx-auto {
+    text-align: center; /* Ensures all text within the section is centered */
+    margin: 0 auto; /* Center the element itself */
+}
+
+/* Row and card styles */
+.row.g-4 {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.service-item {
+    background-color: rgba(7, 7, 7, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Image styling */
+.service-img img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 10px 10px 0 0;
+}
+
+/* Card content */
+.rounded-bottom {
+    padding: 20px;
+    text-align: center;
+    background-color: rgba(63, 59, 59, 0.644);
+}
+
+.rounded-bottom a.h4 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #d8c797; /* Accent color */
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.rounded-bottom a.h4:hover {
+    color: #fff; /* Hover effect for event name */
+}
+
+.rounded-bottom p {
+    color: #ddd;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+/* Button styling */
+.btn-primary {
+    background-color: #1d3d25;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #218838;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Form Styles for Review Section - Modern and Bigger */
+.review-form {
+    width: 800px;
+    margin: 50px auto;
+    background: rgba(48, 46, 46, 0.15);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    color: #fff;
+    backdrop-filter: blur(10px); /* Adds a modern frosted-glass effect */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.review-form h2 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #c7b581; /* Accent color for header */
+}
+
+.review-form .form-group {
+    margin: 0; /* Remove space between fields */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: left; /* Aligns content to the left */
+    padding: 15px; /* Add padding for spacing from edges */
+}
+
+.review-form label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #dfca8c;
+    display: block;
+    margin-bottom: 5px;
+    background-color: transparent;
+    border: none;
+    padding: 0; /* Ensure alignment to the left */
+}
+
+.review-form input,
+.review-form select,
+.review-form textarea {
+    text-align: left; /* Aligns input text to the left */
+    width: 100%;
+    padding: 15px;
+    border: none;
+    font-size: 16px;
+    background-color: transparent;
+    color: #fff;
+    box-sizing: border-box;
+}
+
+.review-form input:focus,
+.review-form select:focus,
+.review-form textarea:focus {
+    outline: none;
+    box-shadow: 0 0 8px rgba(201, 181, 122, 0.8);
+    transform: scale(1.02); /* Subtle zoom-in effect */
+}
+
+.review-form textarea {
+    height: 150px;
+    resize: none;
+}
+
+.review-form button.submit-btn {
+    background: linear-gradient(45deg, #1d3d25, #1d3d25);
+    color: #fff;
+    border: none;
+    padding: 15px 20px;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.review-form button.submit-btn:hover {
+    background: linear-gradient(45deg, #1d3d25, #1d3d25);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Updated Dropdown styles */
+.review-form select {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.15); /* Blurred background */
+    color: #fff;
+    border-radius: 5px;
+    backdrop-filter: blur(10px); /* Frosted-glass effect */
+    -webkit-backdrop-filter: blur(10px); /* Frosted-glass effect for Safari */
+    outline: none;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Optional shadow for depth */
+    margin-bottom: 20px; /* Spacing between fields */
+}
+
+.review-form select:focus {
+    background: rgba(255, 255, 255, 0.25); /* Slightly lighter on focus */
+    color: #c7b788; /* Highlighted text color */
+    box-shadow: 0 0 8px rgba(201, 181, 122, 0.8); /* Glow effect */
+}
+
+.review-form option {
+    background: rgba(0, 0, 0, 0.8); /* Darker background for options */
+    color: #fff;
+    padding: 10px;
+}
+/* General styles for reviews and comments */
+.reviews-section {
+    padding: 30px 15px; /* Reduced padding */
+    margin-top: 20px; /* Reduced margin */
+    border-radius: 10px;
+    color: #fff;
+}
+
+.reviews-section h2 {
+    color: #d8c797; /* Accent color for heading */
+    font-size: 30px; /* Reduced font size */
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 15px; /* Reduced margin */
+}
+
+/* Styling for individual avis items */
+.avis-item {
+    background-color: rgba(63, 59, 59, 0.7);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 80%; /* Set the width to 80% of its parent container */
+    margin-left: auto; /* Centers the avis item */
+    margin-right: auto; /* Centers the avis item */
+}
+
+.avis-item h3 {
+    font-size: 18px; /* Reduced font size */
+    color: #c7b581;
+    font-weight: bold;
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+.avis-item p {
+    font-size: 14px; /* Reduced font size */
+    color: #ddd;
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+.avis-item .comments-section {
+    margin-top: 15px; /* Reduced margin */
+}
+
+.avis-item .comments-section h4 {
+    font-size: 18px; /* Reduced font size */
+    color: #c7b581;
+    margin-bottom: 8px; /* Reduced margin */
+}
+
+.comment {
+    background-color: rgba(48, 46, 46, 0.5);
+    padding: 12px; /* Reduced padding */
+    border-radius: 8px;
+    margin-bottom: 8px; /* Reduced margin */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.comment p {
+    font-size: 13px; /* Reduced font size */
+    color: #ddd;
+}
+
+.comment p strong {
+    color: #d8c797;
+}
+
+.comment p em {
+    font-size: 11px; /* Reduced font size */
+    color: #aaa;
+}
+
+/* Comment Form Styling */
+form {
+    background: rgba(48, 46, 46, 0.2);
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    margin-top: 15px;
+    width: 80%; /* Same width as avis items */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    padding: 10px; /* Reduced padding */
+    margin: 6px 0; /* Reduced margin */
+    background-color: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    font-size: 14px; /* Reduced font size */
+    box-sizing: border-box;
+    transition: border-color 0.3s, background-color 0.3s ease;
+}
+
+form input:focus,
+form textarea:focus {
+    border-color: #c7b581;
+    background-color: rgba(255, 255, 255, 0.3);
+    outline: none;
+    box-shadow: 0 0 8px rgba(201, 181, 122, 0.8);
+}
+
+form button {
+    background-color: #1d3d25;
+    color: #fff;
+    padding: 12px 25px; /* Reduced padding */
+    font-size: 14px; /* Reduced font size */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    width: 100%;
+}
+
+form button:hover {
+    background-color: #218838;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive Design for Small Screens */
+@media screen and (max-width: 768px) {
+    .avis-item {
+        padding: 12px; /* Reduced padding */
+    }
+
+    .reviews-section {
+        padding: 15px; /* Reduced padding */
+    }
+
+    .reviews-section h2 {
+        font-size: 24px; /* Reduced font size */
+    }
+
+    .avis-item h3 {
+        font-size: 16px; /* Reduced font size */
+    }
+
+    .comment p {
+        font-size: 12px; /* Reduced font size */
+    }
+
+    form input,
+    form textarea {
+        font-size: 14px; /* Reduced font size */
+    }
+
+    form button {
+        font-size: 14px; /* Reduced font size */
+    }
+}
+
+/* Filter Section Styles */
+.filter-section {
+    background: rgba(48, 46, 46, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px); /* Adds a modern frosted-glass effect */
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    margin: 20px auto;
+    
+}
+
+/* Title for Filter Section */
+.filter-section h3 {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #c7b581; /* Accent color for header */
+}
+
+/* Filter Form */
+.filter-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Label for the Select Input */
+.filter-section label {
+    font-size: 16px;
+    color: #ffffff;
+    font-weight: 500;
+}
+
+/* Filter Section Dropdown Styling */
+.filter-section select {
+    background-color: #f9f9f9; /* Same background as the avis list */
+    border: 1px solid #ccc; /* Match border with the avis list */
+    padding: 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-size: 14px;
+    color: #333;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.filter-section select:hover {
+    background-color: #e9e9e9; /* Slightly darker background on hover */
+    border-color: #888; /* Darker border on hover */
+}
+
+.filter-section select:focus {
+    background-color: #fff; /* White background when focused */
+    border-color: #007bff; /* Highlight border on focus */
+    outline: none;
+}
+
+.filter-section option {
+    background-color: #fff; /* Background for options */
+    color: #333;
+}
+
+
+
+/* Button to Submit the Filter */
+.filter-section button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+
+
+/* Responsive Styling for Smaller Screens */
+@media screen and (max-width: 768px) {
+    .filter-section {
+        padding: 15px;
+    }
+
+    .filter-section form {
+        gap: 10px;
+    }
+}
