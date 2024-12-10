@@ -1,19 +1,23 @@
-
 <?php
 class Product {
+    private $id;
     private $nom;
     private $prix;
     private $quantite;
-    private $photo; // Add this property to store BLOB data
+    private $photo;
 
-    public function __construct($nom, $prix, $quantite, $photo) {
-        $this->nom = $nom;
-        $this->prix = $prix;
-        $this->quantite = $quantite;
-        $this->photo = $photo; // Set this property
+    public function __construct($data) {
+        $this->id = $data['id']; 
+        $this->nom = $data['nom'];
+        $this->prix = $data['prix'];
+        $this->quantite = $data['quantite'];
+        $this->photo = $data['photo'];
     }
 
-    // Add getters for the properties
+    public function getId() {
+        return $this->id;
+    }
+
     public function getNom() {
         return $this->nom;
     }
@@ -26,12 +30,8 @@ class Product {
         return $this->quantite;
     }
 
-    public function getPhoto() { // Add this getter
+    public function getPhoto() {
         return $this->photo;
     }
 }
-
-
-
-
 ?>
