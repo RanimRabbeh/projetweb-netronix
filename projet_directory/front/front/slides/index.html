@@ -112,30 +112,50 @@
         <li><a href="#case">Forum</a></li>
         <li><a href="#pricing">Réclamations</a></li>
         <li><a href="#download">Téléchargement</a></li>
-      </ul>
+        <button onclick="openProfileIframe()" class="profile-button">Profil</button>      </ul>
       
       <!-- Bouton pour ouvrir l'iframe -->
-      <button onclick="openIframe()" class="login-button">Se connecter</button>
+      <button onclick="redirectToLogin()" class="login-button">Se connecter</button>
     </div>
   </div>
 </nav>
 
 <!-- Iframe pour le login -->
-<div id="loginIframeContainer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:1000;">
+<div id="profileIframeContainer" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:1000;">
   <div style="position:relative; width:80%; max-width:500px; margin:50px auto; background:white; padding:20px; border-radius:10px;">
-    <iframe src="http://localhost/projet_directory/views/login.php" style="width:100%; height:400px; border:none;"></iframe>
-    <button onclick="closeIframe()" style="position:absolute; top:10px; right:10px; background:red; color:white; border:none; padding:5px 10px; border-radius:5px;">X</button>
+    <iframe src="http://localhost/projet_directory/views/profile.php" style="width:100%; height:400px; border:none;"></iframe>
+    <button onclick="closeProfileIframe()" style="position:absolute; top:10px; right:10px; background:red; color:white; border:none; padding:5px 10px; border-radius:5px;">X</button>
   </div>
 </div>
-
+<div id="profie" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:1000;">
+  <div style="position:relative; width:80%; max-width:500px; margin:50px auto; background:white; padding:20px; border-radius:10px;">
+    <iframe src="http://localhost/projet_directory/views/profile.php" style="width:100%; height:400px; border:none;"></iframe>
+    <button onclick="closeIframep()" style="position:absolute; top:10px; right:10px; background:red; color:white; border:none; padding:5px 10px; border-radius:5px;">X</button>
+  </div>
+</div>
 <script>
-  function openIframe() {
-    document.getElementById('loginIframeContainer').style.display = 'block';
+
+  
+function openProfileIframe() {
+  window.location.href = 'http://localhost/projet_directory/views/profile.php';
+}
+
+  // Close Profile Iframe
+  function closeProfileIframe() {
+    document.getElementById('profileIframeContainer').style.display = 'none';
   }
 
+  function redirectToLogin() {
+    // Rediriger vers la page login.php
+    window.location.href = 'http://localhost/projet_directory/views/login.php';
+  }
+  function closeIframep() {
+    document.getElementById('loginIframeContainer').style.display = 'none';
+  }
   function closeIframe() {
     document.getElementById('loginIframeContainer').style.display = 'none';
   }
+  
 </script>
 
 

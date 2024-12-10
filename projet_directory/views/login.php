@@ -1,18 +1,55 @@
-<?php
-require_once '../includes/database.php';
+<?php 
+require_once '../includes/database.php'; // Include the Database connection
 require_once '../controller/UserController.php';
+require_once '../models/UserModel.php';
 
-$message = ""; // Pour stocker le message de feedback
+// Create a Database instance
+$database = new Database();
+$db = $database->getConnection(); // Get the database connection
+
+$message = ""; // Feedback message for the user
+
+// Helper function to log directly to the browser console
+function console_log($data) {
+    echo "<script>console.log(" . json_encode($data) . ");</script>";
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = trim($_POST['email']);
+    $password = trim($_POST['password']);
 
-    // Créer une instance du contrôleur avec la connexion à la base de données
-    $userController = new UserController($db);
+    // Debug: Log input values to the browser console
+    console_log("Email entered: " . $email);
+    console_log("Password entered: " . $password);
 
-    // Appeler la méthode login pour traiter les identifiants
-    $message = $userController->login($email, $password);
+    try {
+        // Initialize UserController with the correct database connection
+        $userController = new UserController($db);
+
+        // Log the initialization
+        console_log("UserController initialized");
+
+        // Handle login process
+        $message = $userController->login($email, $password);
+
+        // Log the login result
+        console_log("Login result: " . $message);
+
+        // Redirect if login is successful
+        if ($message === "Connexion réussie") {
+            console_log("Redirecting to the home page");
+            header('Location: http://localhost/projet_directory/front/front/slides/index.html');
+            exit();
+        } else {
+            // If login fails, show an error message
+            $message = "Email ou mot de passe incorrect. Veuillez réessayer.";
+            console_log("Login failed: " . $message);
+        }
+    } catch (Exception $e) {
+        // Log error
+        console_log("Error: " . $e->getMessage());
+        $message = "Une erreur est survenue. Veuillez réessayer.";
+    }
 }
 ?>
 
@@ -23,82 +60,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
     <link rel="stylesheet" href="../css/style.css">
-
-    <!-- Facebook SDK -->
-    <script async defer crossorigin="anonymous" 
-            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v16.0&appId=YOUR_APP_ID&autoLogAppEvents=1"></script>
+    <script src="../js/form_validation.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>Connexion</h1>
-        
-        <?php if ($message): ?>
+
+        <!-- Display feedback message -->
+        <?php if (!empty($message)): ?>
             <p class="message"><?= htmlspecialchars($message) ?></p>
         <?php endif; ?>
         
-        <!-- Formulaire de connexion classique -->
+        <!-- Login form -->
         <form action="login.php" method="POST" onsubmit="return validateLoginForm()">
-            <input type="email" id="email" name="email" placeholder="Email" required>
-            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
+            <input type="email" id="email" name="email" placeholder="Email" >
+            <input type="password" id="password" name="password" placeholder="Mot de passe" >
             <button type="submit">Se connecter</button>
         </form>
 
-        <!-- Liens vers les autres pages -->
+        <!-- Links to other pages -->
         <p><a href="reset_password.php">Mot de passe oublié ?</a></p>
         <p><a href="register.php">Créer un compte</a></p>
 
-        <!-- Bouton de connexion avec Facebook -->
+        <!-- Social login buttons -->
         <div class="social-login">
-    <a href="https://www.facebook.com/login.php" target="_blank">
-        <button id="fb-login-btn">Se connecter avec Facebook</button>
-    </a>
-</div>
-
+            <a href="https://github.com/login/oauth/authorize?client_id=Ov23liEdQ7qkXTArJ4Qy&redirect_uri=http://localhost/projet_directory/github-callback.php&scope=user">
+                <button>Login with GitHub</button>
+            </a>
+        </div>
     </div>
 
     <script>
-        // Initialisation du SDK Facebook
-        window.fbAsyncInit = function() {
-            FB.init({
-                appId      : 'YOUR_APP_ID',  // Remplacez par votre propre ID d'application
-                cookie     : true,
-                xfbml      : true,
-                version    : 'v16.0'
-            });
-        };
-
-        // Fonction de connexion Facebook
-        function facebookLogin() {
-            FB.login(function(response) {
-                if (response.authResponse) {
-                    // L'utilisateur est connecté avec succès
-                    console.log('Bienvenue !');
-
-                    // Vous pouvez récupérer l'ID utilisateur et d'autres informations ici
-                    FB.api('/me', function(response) {
-                        console.log('Données de l’utilisateur : ', response);
-                        // Vous pouvez envoyer ces informations à votre serveur pour créer un compte
-                        // ou connecter l'utilisateur
-                    });
-
-                } else {
-                    console.log('L\'utilisateur a annulé la connexion ou il y a eu une erreur');
-                }
-            }, {scope: 'public_profile,email'});  // Demander l'accès au profil et à l'email
-        }
-
-        // Fonction pour valider le formulaire de connexion
+        // Validate the login form
         function validateLoginForm() {
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
 
-            // Validation basique
             if (!email || !password) {
                 alert('Veuillez remplir tous les champs.');
                 return false;
             }
 
-            // Exemple de validation de format d'email
             const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             if (!emailPattern.test(email)) {
                 alert('Veuillez entrer un email valide.');
@@ -109,4 +111,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     </script>
 </body>
-</html> 
+</html>
