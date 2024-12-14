@@ -6,11 +6,6 @@ $conversionRate = 0.31; // Example conversion rate (1 TND = 0.31 EUR)
 
 $productController = new ProductController();
 $products = $productController->getAllProducts();
-
-// Sort products by price (ascending order)
-usort($products, function($a, $b) {
-    return $a->getPrix() - $b->getPrix(); // Compare the price of products
-});
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,6 +49,29 @@ usort($products, function($a, $b) {
         .logo {
             height: 80px;
             margin-right: 5px; 
+        }
+
+        .search-sell-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-sell-container input, .search-sell-container button {
+            margin-left: 10px;
+        }
+
+        #sort-button {
+            background-color: #5D3A00; 
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+
+        #sort-button:hover {
+            background-color: #be965a; 
         }
 
         main {
@@ -210,41 +228,61 @@ usort($products, function($a, $b) {
         
         <div class="search-sell-container">
             <input type="text" id="search-bar" placeholder="Rechercher un produit..." onkeyup="searchProduct()">
+            <button id="sort-button" onclick="sortByPrice()">de moins à plus prix</button>
             <a href="vente.php" target="_blank"><button class="sell-button">vendre</button></a>
         </div>
     </header>
 
-    <main>
-    <?php foreach ($products as $product): ?>
-    <div class="shop-item">
-        <div class="image-gallery">
-            <img src="data:image/jpeg;base64,<?= $product->getPhoto(); ?>" alt="Product Photo">
+    <main id="product-list">
+        <?php foreach ($products as $product): ?>
+        <div class="shop-item" data-price="<?= $product->getPrix(); ?>" data-clicks="0">
+            <div class="image-gallery">
+                <img src="data:image/jpeg;base64,<?= $product->getPhoto(); ?>" alt="Product Photo">
+            </div>
+            <h2><?= $product->getNom(); ?></h2>
+            <p class="description"><?= $product->getQuantite(); ?></p>
+            <p class="price" id="price-<?= $product->getId(); ?>">Prix: <?= $product->getPrix(); ?> TND</p>
+            <button class="convert-btn" onclick="convertToEuro(this, <?= $product->getPrix(); ?>, <?= $product->getId(); ?>)">Convert to Euro</button>
+            <p class="euro-price" id="euro-<?= $product->getId(); ?>"></p>
+            <a href="product_details.php?id=<?= $product->getId(); ?>" target="_blank"><button class="details-button">Plus de détails</button></a>
         </div>
-        <h2><?= $product->getNom(); ?></h2>
-        <p class="description"><?= $product->getQuantite(); ?></p>
-        <p class="price" id="price-<?= $product->getId(); ?>">Prix: <?= $product->getPrix(); ?> TND</p>
-        <button class="convert-btn" onclick="convertToEuro(this, <?= $product->getPrix(); ?>, <?= $product->getId(); ?>)">Convert to Euro</button>
-        <p class="euro-price" id="euro-<?= $product->getId(); ?>"></p>
-        <a href="product_details.php?id=<?= $product->getId(); ?>" target="_blank"><button class="details-button">Plus de détails</button></a>
-    </div>
-    <?php endforeach; ?>
+        <?php endforeach; ?>
     </main>
 
     <script>
-        function convertToEuro(button, priceTND, productId) {
-            var euroPrice = priceTND * <?= $conversionRate; ?>;
-            var euroPriceElement = document.getElementById('euro-' + productId);
-            var priceElement = document.getElementById('price-' + productId);
+        var originalItems = [];
+        var isSorted = false;
 
-            // Toggle Euro price visibility
-            if (euroPriceElement.style.display === "none" || euroPriceElement.style.display === "") {
-                euroPriceElement.innerText = "Prix: " + euroPrice.toFixed(2) + " EUR";
-                euroPriceElement.style.display = "block"; // Show Euro price
-                priceElement.style.display = "none"; // Hide TND price
+        window.onload = function() {
+            var main = document.querySelector('main');
+            var shopItems = Array.from(main.getElementsByClassName('shop-item'));
+            originalItems = shopItems.map(function(item) {
+                return item.cloneNode(true); 
+            });
+        };
+
+        function sortByPrice() {
+            var main = document.querySelector('main');
+            var shopItems = Array.from(main.getElementsByClassName('shop-item'));
+            
+            if (isSorted) {
+                // Reverse the order to return to the original order
+                shopItems.reverse();
             } else {
-                euroPriceElement.style.display = "none"; // Hide Euro price
-                priceElement.style.display = "block"; // Show TND price again
+                // Sort the items based on the price
+                shopItems.sort(function(a, b) {
+                    var priceA = parseFloat(a.getAttribute('data-price'));
+                    var priceB = parseFloat(b.getAttribute('data-price'));
+                    return priceA - priceB;
+                });
             }
+
+            // Re-append sorted items in the main container
+            shopItems.forEach(function(item) {
+                main.appendChild(item); // Re-append in sorted order
+            });
+
+            isSorted = !isSorted; // Toggle the sorting state
         }
 
         function searchProduct() {
@@ -264,6 +302,30 @@ usort($products, function($a, $b) {
                         shopItems[i].style.display = 'none';
                     }
                 }
+            }
+        }
+
+        function convertToEuro(button, priceTND, productId) {
+            var product = button.closest('.shop-item');
+            var clickCount = parseInt(product.getAttribute('data-clicks'));
+            var maxClicks = 3; // Stop after 3 clicks
+            var euroPrice = priceTND * <?= $conversionRate; ?>;
+            var euroPriceElement = document.getElementById('euro-' + productId);
+            var priceElement = document.getElementById('price-' + productId);
+
+            if (clickCount < maxClicks) {
+                if (euroPriceElement.style.display === "none" || euroPriceElement.style.display === "") {
+                    euroPriceElement.innerText = "Prix: " + euroPrice.toFixed(2) + " EUR";
+                    euroPriceElement.style.display = "block";
+                    priceElement.style.display = "none";
+                    product.setAttribute('data-clicks', clickCount + 1); // Increment click count
+                } else {
+                    euroPriceElement.style.display = "none";
+                    priceElement.style.display = "block";
+                }
+            } else {
+                button.disabled = true; // Disable button after max clicks
+                button.innerText = "Max Clicks Reached"; // Change button text to indicate the limit
             }
         }
     </script>
