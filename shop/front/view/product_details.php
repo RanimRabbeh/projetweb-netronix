@@ -1,5 +1,6 @@
 <?php
 require_once '../controller/ProductController.php';
+require_once '../controller/ReviewController.php';
 
 // Check if 'id' is set in the URL
 if (isset($_GET['id'])) {
@@ -19,6 +20,10 @@ if (isset($_GET['id'])) {
     echo "No product ID provided.";
     exit;
 }
+
+// Get all reviews for the product
+$reviewController = new ReviewController();
+$reviews = $reviewController->getReviewsByProductId($productId);
 ?>
 
 <!DOCTYPE html>
@@ -76,17 +81,43 @@ if (isset($_GET['id'])) {
             font-size: 1.5em;
             margin-right: 5px;
         }
-        .buy-button {
+        .review-form {
+            margin-top: 20px;
+        }
+        .review-form textarea {
+            width: 100%;
+            max-width: 500px; /* Limit width */
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            resize: vertical;
+            margin-bottom: 10px; /* Add space between textarea and button */
+        }
+        .review-form button {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             text-decoration: none;
             border-radius: 5px;
-            display: inline-block;
-            margin-top: 20px;
+            border: none;
+            cursor: pointer;
         }
-        .buy-button:hover {
+        .review-form button:hover {
             background-color: #45a049;
+        }
+        .reviews {
+            margin-top: 30px;
+        }
+        .review {
+            background: #f1f1f1;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            max-width: 500px; /* Limit width of reviews */
+        }
+        .review p {
+            margin: 0;
+            color: #555;
         }
     </style>
 </head>
@@ -104,7 +135,28 @@ if (isset($_GET['id'])) {
                         <span class="star">&#9733;</span>
                     <?php endfor; ?>
                 </div>
-                <a href="contact_vendeur.php?id=<?= $product->getId(); ?>" class="buy-button">Contacter le vendeur</a>
+            </div>
+            
+            <!-- Review Form (aligned left) -->
+            <div class="review-form">
+                <h3>Submit a Review</h3>
+                <form action="submit_review.php" method="post">
+                    <input type="hidden" name="product_id" value="<?= $product->getId(); ?>">
+                    <textarea name="review_text" rows="5" required></textarea>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+
+            <!-- Reviews List (aligned left) -->
+            <div class="reviews">
+                <h3>Reviews</h3>
+                <?php foreach ($reviews as $review): ?>
+                    <div class="review">
+                        <p><strong>User ID:</strong> <?= htmlspecialchars($review->getUserId()); ?></p>
+                        <p><?= htmlspecialchars($review->getReviewText()); ?></p>
+                        <p><em>Submitted on <?= $review->getCreatedAt(); ?></em></p>
+                    </div>
+                <?php endforeach; ?>
             </div>
         <?php else : ?>
             <p>Produit non trouvé.</p>
