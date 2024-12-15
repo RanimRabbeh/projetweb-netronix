@@ -218,6 +218,30 @@ $products = $productController->getAllProducts();
         .convert-btn:hover {
             background-color: #be965a;
         }
+        .like-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.favorite-icon {
+    color: #808080; /* Default color for inactive icon */
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.favorite-icon.active {
+    color: #ff0000; /* Red color when active */
+}
+
+.like-counter {
+    margin-left: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+
     </style>
 </head>
 <body>
@@ -328,6 +352,34 @@ $products = $productController->getAllProducts();
                 button.innerText = "Max Clicks Reached"; // Change button text to indicate the limit
             }
         }
+        function handleLike(icon, productId) {
+    var likeCounter = document.getElementById('like-counter-' + productId);
+    var currentLikes = parseInt(likeCounter.innerText);
+
+    // Toggle the like state (active/inactive)
+    if (icon.classList.contains('active')) {
+        icon.classList.remove('active');
+        likeCounter.innerText = currentLikes - 1; // Decrement the likes count
+        updateLikes(productId, -1); // Optional: update on the server
+    } else {
+        icon.classList.add('active');
+        likeCounter.innerText = currentLikes + 1; // Increment the likes count
+        updateLikes(productId, 1); // Optional: update on the server
+    }
+}
+
+// Optional: Send updated like count to the server
+function updateLikes(productId, delta) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', 'update_likes.php', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status !== 200) {
+            console.error('Failed to update likes on the server');
+        }
+    };
+    xhr.send('id=' + productId + '&delta=' + delta);
+}
     </script>
 </body>
 </html>
