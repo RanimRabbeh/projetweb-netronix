@@ -1,0 +1,127 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('../../../assets/img/background/5.jpeg');
+       display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.right {
+    margin-left: auto; /* Permet de pousser le logo à gauche */
+  }
+
+/* Conteneur du formulaire */
+.form-container {
+    max-width: 600px;
+    width: 100%;
+    margin: 20px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+    text-align: center;
+    color:#684a31;
+    margin-bottom: 20px;
+}
+
+/* Style des champs de formulaire */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #555;
+}
+
+input[type="text"],
+input[type="date"],
+select,
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="date"]:focus,
+select:focus,
+textarea:focus {
+    border-color: #6a11cb;
+    box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
+    outline: none;
+}
+
+/* Style du bouton */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #272626;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color:#b9b2a3;
+}
+
+/* Style du texte de l'option */
+option {
+    color: #555;
+}
+
+/* Ajustement pour les appareils plus petits */
+@media (max-width: 600px) {
+    .form-container {
+        padding: 15px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+/* Style général des liens */
+.menu li a {
+    font-family: Arial, sans-serif; /* Police de caractère */
+    font-size: 16px; /* Taille de la police */
+    color: #f0f0f0; /* Couleur du texte */
+    text-decoration: none; /* Supprime le soulignement */
+    padding: 10px 15px; /* Espacement interne */
+    display: block; /* Transforme en bloc pour gérer le padding */
+    transition: all 0.3s ease; /* Transition pour les effets */
+  }
+  
+  /* Effet au survol (hover) */
+  .menu li a:hover {
+    color: #0d0d0e; /* Change la couleur du texte au survol */
+    background-color: #f0f0f0; /* Ajoute un fond léger au survol */
+    border-radius: 5px; /* Arrondit les coins */
+  }
+  
+  /* Lien actif (optionnel) */
+  .menu li a:active {
+    color: #0d0d0e; /* Couleur différente pour les liens cliqués */
+    background-color: #e0e0e0;
+  }
+  
+  /* Espacement entre les éléments de menu */
+  .menu li {
+    margin-right: 10px; /* Espacement entre les éléments */
+    display: inline-block; /* Affiche les éléments sur une seule ligne */
+  }
